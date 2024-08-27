@@ -129,7 +129,7 @@ class Counter extends Component{
 }
 export default Counter;
 
-5.) WELCOME
+6.) WELCOME
 
 import React from "react";
 
