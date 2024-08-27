@@ -128,3 +128,18 @@ class Counter extends Component{
 	}
 }
 export default Counter;
+
+5.) WELCOME
+
+import React from "react";
+
+function student()
+{
+return(
+<div>
+<h1>WELCOME</h1>
+</div>
+)
+
+}
+ export default student
