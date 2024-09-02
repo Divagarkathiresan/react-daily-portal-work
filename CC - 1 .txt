@@ -1,0 +1,732 @@
+CC - 1 
+
+<LOGINPAGE>
+
+Loginpage.js
+
+import React, { useState } from 'react';
+import './loginpage.css';
+import Signup from './signup';
+import Home from './homepage';
+
+function Login() {
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [isHome, setIsHome] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  if (isSignUp) {
+    return <Signup />; // RENDERING SIGNUP PAGE IF (isSignUp) IS TRUE
+  }
+
+  if (isHome) {
+    return <Home />; // RENDERING HOME PAGE IF (isHome) IS TRUE
+  }
+
+  const validateEmail = (email) => {
+    const re = /^[a-zA-Z0-9._%+-]+@[gmail]+\.[a-zA-Z]{2,}$/;   // Basic email format regex
+    return re.test(email);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();     // Prevent form from submitting by default
+
+    if (!validateEmail(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    if (password.length < 6) {
+      alert('Password should be at least 6 characters long.');
+      return;
+    }
+
+    setIsHome(true);       // If validation passes, redirect to the home page
+  };
+
+  return (
+    <div>
+      <div className='body'>
+        <h2>FOODIE BEE </h2>
+        <h3>A new food delivery website</h3>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Username or Email
+          </label>
+          <input 
+            type="text" 
+            placeholder="Enter your Mail-Id" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required 
+          />
+          <label>
+            Password
+          </label>
+          <input 
+            type="password" 
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required 
+          />
+          <a href='#' style={{textDecoration:'none', color:'darkblue'}}>Forget Password?</a>
+          <button type="submit">Login</button>
+        </form>
+        <h4>Don't have an account?{' '}
+          <a href="#" style={{textDecoration:'none', color:'darkblue'}} onClick={() => setIsSignUp(true)}>Sign Up</a>
+        </h4>
+      </div>
+    </div>
+  );
+}
+
+export default Login;
+
+loginpage.css
+
+body {
+	background: linear-gradient(to right, #FFD700, #FFFACD); /* Golden to light yellow gradient */
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.body {
+	background: linear-gradient(to bottom, #FFD700, #FFFACD); /* Golden to light yellow gradient */
+	display: flex;
+	width: 400px;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 1px solid black;
+	border-radius: 25px;
+	flex-wrap: nowrap;
+	transform: scale(1.1); /* Slightly enlarge the content */
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+h2, h3 {
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h3 {
+	margin-top: 0px;
+}
+
+form label {
+	font-size: medium;
+	margin-left: 0px;
+	padding: 5px;
+}
+
+input {
+	width: 250px;
+	height: 23px;
+}
+
+form a {
+	display: flex;
+	justify-content: flex-end;
+	font-size: small;
+	padding-bottom: 9px;
+}
+
+button {
+	background-color: blue;
+	border: none;
+	height: 30px;
+	color: white;
+	font-size: medium;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input:active {
+	border-radius: 20px;
+}
+
+button:hover {
+	background-color: blue;
+	cursor: pointer;
+	border-radius: 20px;
+}
+
+button:active {
+	background-color: green;
+	cursor: progress;
+}
+
+
+<SIGNUP PAGE>
+
+signup.js
+
+import React ,{ useState } from 'react';
+import Home from './homepage';
+import './signup.css'
+function Signup(){
+  const [isHome, setIsHome] = useState(false);
+
+  if (isHome) {
+    return <Home />; // RENDERING HOME PAGE IF (isHome) IS TRUE
+  }
+  return(
+    <div className='sign'>
+      <h3>Sign Up !</h3>
+      <form className='signupform'>
+        <label>
+          Email :
+        </label>
+        <input type="email" required placeholder='Enter your mail id'>
+        </input>
+        <br></br>
+        <label>
+          Password :
+        </label>
+        <input type="password" required placeholder='Enter your password'> 
+        </input>
+        <br></br>
+        <button type="submit" onClick={() => setIsHome(true)}>Signup</button>
+      </form>
+    </div>
+  );
+}
+
+export default Signup;
+
+signup.css
+
+.sign{
+	border:1px solid black;
+	border-radius: 20px;
+	height: 330px;
+	width:300px;
+}
+
+.signupform input{
+	padding:3x;
+	margin-left: 10px;
+}
+
+.sign h3{
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.sign button{
+	margin-left: 100px;
+	width:100px;
+}
+
+
+<HOMEPAGE>
+
+homepage.js
+
+import React, { useState, useEffect } from "react";
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import SettingsIcon from '@mui/icons-material/Settings';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import RoomServiceOutlinedIcon from '@mui/icons-material/RoomServiceOutlined';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
+import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import SearchIcon from '@mui/icons-material/Search';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
+import BriyaniImage from './briyani.jpeg';
+import NaanImage from './naanroti.jpeg';
+import rice from './rice.jpeg';
+import idlidosa from './dosa.jpeg';
+import burger from './burger.jpeg';
+import pizza from './pizza.jpeg';
+import './homepage.css';
+import './loginpage.css';
+
+function Home() {
+  const [openDialog, setOpenDialog] = useState(false);
+  const [openContact, setOpenContact] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [showAppBar, setShowAppBar] = useState(true);
+  const [orderCount, setOrderCount] = useState(0);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [orderDialogOpen, setOrderDialogOpen] = useState(false);
+  let lastScrollY = window.scrollY;
+
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const opencontact = () => {
+    setOpenContact(true);
+  };
+
+  const closecontact = () => {
+    setOpenContact(false);
+  };
+
+  const toggleDrawer = (open) => (event) => {
+    setOpenDrawer(open);
+  };
+
+  const handleScroll = () => {
+    const appBar = document.querySelector('.appbar');
+
+    if (window.scrollY < lastScrollY) {
+      appBar.style.top = "0";
+    } else {
+      appBar.style.top = "-64px"; 
+    }
+
+    lastScrollY = window.scrollY;
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleOrderNow = (orderDetails) => {
+    setOrderCount(orderCount + 1);
+    setSelectedOrder(orderDetails);
+    setOrderDialogOpen(true);
+  };
+
+  return (
+    <div>
+      {showAppBar && (
+        <AppBar color="transparent" className="appbar" style={{ transition: "top 0.3s ease-in-out" }}>
+          <Toolbar style={{ justifyContent: "space-between" }}>
+            <IconButton
+              edge="start"
+              aria-label="menu"
+              sx={{ color: 'black' }}
+              onClick={toggleDrawer(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+            <TextField
+              placeholder="Search..."
+              size="small"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              sx={{ backgroundColor: 'white', borderRadius: 1, minWidth: 400, marginLeft: '50px' }}
+            />
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button color="inherit" sx={{ color: 'black', backgroundColor: 'inherit', '&:hover': { backgroundColor: "yellow", color: 'black' } }}>
+                <IconButton>
+                  <HomeOutlinedIcon />
+                </IconButton>
+                Home
+              </Button>
+              <Button color="inherit" sx={{ color: 'black', backgroundColor: 'inherit', '&:hover': { backgroundColor: "yellow", color: 'black' } }}>
+                <IconButton><ShoppingCartOutlinedIcon /></IconButton>Orders ({orderCount})
+              </Button>
+              <Button
+                color="inherit"
+                sx={{ color: 'black', backgroundColor: 'inherit', '&:hover': { backgroundColor: "yellow", color: 'black' } }}
+                onClick={handleClickOpen}
+              >
+                <IconButton>
+                  <InfoOutlinedIcon />
+                </IconButton>
+                About
+              </Button>
+              <Button color="inherit" sx={{ color: 'black', backgroundColor: 'inherit', '&:hover': { backgroundColor: "yellow", color: 'black' } }} onClick={opencontact}>
+                <IconButton>
+                  <ContactPageOutlinedIcon />
+                </IconButton>Contact
+              </Button>
+            </div>
+          </Toolbar>
+        </AppBar>
+      )}
+
+      <Drawer
+        anchor="left"
+        open={openDrawer}
+        onClose={toggleDrawer(false)}
+      >
+        <List>
+          <ListItem button>
+            <IconButton>
+              <AccountCircleIcon />
+            </IconButton>
+            My Profile
+          </ListItem>
+          <ListItem button>
+            <IconButton>
+              <NotificationsActiveIcon />
+            </IconButton>
+            Notifications
+          </ListItem>
+          <ListItem button>
+            <IconButton>
+              <SettingsIcon />
+            </IconButton>
+            Settings
+          </ListItem>
+          <ListItem button>
+            <IconButton>
+              <LogoutIcon />
+            </IconButton>
+            Logout
+          </ListItem>
+        </List>
+      </Drawer>
+
+      <Dialog
+        open={openDialog}
+        onClose={handleCloseDialog}
+      >
+        <DialogTitle style={{ fontSize: 'large' }}>About</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Shopify is one of the largest and most influential e-commerce platforms in the world.
+            Search and Navigation: Advanced search algorithms and user-friendly navigation make it easy for customers to find products quickly.
+            Personalized Recommendations: Uses machine learning and browsing history to recommend products tailored to individual preferences.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog} color="primary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={openContact}
+        onClose={closecontact}
+      >
+        <DialogTitle style={{ color: 'black', fontSize: 'large' }}>
+          Contact
+        </DialogTitle>
+        <DialogContent>
+          Phone number : +91-9876543210<br /><br />
+          Email : <a href="#" style={{ textDecoration: 'none', color: 'blue' }}>foodiefly01@gmail.com</a>
+          <br /><br />
+          <IconButton edge="start">
+            <InstagramIcon />
+          </IconButton>
+          <IconButton edge="middle">
+            <FacebookIcon />
+          </IconButton>
+          <IconButton edge="end">
+            <TwitterIcon />
+          </IconButton>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={closecontact}>
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={orderDialogOpen}
+        onClose={() => setOrderDialogOpen(false)}
+      >
+        {selectedOrder && (
+          <>
+            <DialogTitle style={{ fontSize: 'large' }}>{selectedOrder.name}</DialogTitle>
+            <DialogContent>
+              <img 
+                src={selectedOrder.image} 
+                alt={selectedOrder.name} 
+                style={{ width: '100%', height: 'auto' }} 
+              />
+              <Typography variant="h6" sx={{ marginTop: '10px', fontWeight: 'bold' }}>
+                {selectedOrder.restaurant}
+              </Typography>
+              <Typography variant="body1" sx={{ marginTop: '5px' }}>
+                {selectedOrder.price}
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'green', marginTop: '5px' }}>
+                {selectedOrder.offer}
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={() => setOrderDialogOpen(false)} color="primary">
+                Close
+              </Button>
+            </DialogActions>
+          </>
+        )}
+      </Dialog>
+
+      {/* Card Container with Food Cards */}
+      <div className="card-container">
+        <Box className="biryani-card">
+          <img src={BriyaniImage} alt="Biryani" />
+          <Typography sx={{marginTop:'10px' , fontWeight:'bold'}}>Chicken Briyani</Typography>
+          <Typography variant="h6" sx={{ marginTop: '10px', fontWeight: 'bold' }}>
+            <IconButton edge="start">
+              <RoomServiceOutlinedIcon />
+            </IconButton>
+            Best Briyani Restaurant
+          </Typography>
+          <Rating value={4.5} precision={0.5} readOnly />
+          <Typography variant="body1" sx={{ marginTop: '5px' }}>₹250</Typography>
+          <Typography variant="body2" sx={{ color: 'green', marginTop: '5px' }}>20% OFF</Typography>
+          <Button 
+            variant="contained" 
+            color="warning" 
+            onClick={() => handleOrderNow({
+              image: BriyaniImage,
+              name: 'Chicken Briyani',
+              restaurant: 'Best Briyani Restaurant',
+              price: '₹250',
+              offer: '20% OFF'
+            })}
+          >
+            OrderNow
+          </Button>
+        </Box>
+
+        <Box className="naan-card">
+          <img src={NaanImage} alt="Naan" />
+          <Typography sx={{marginTop:'10px' , fontWeight:'bold'}}>Butter Naan</Typography>
+          <Typography variant="h6" sx={{ marginTop: '10px', fontWeight: 'bold' }}>
+            <IconButton edge="start">
+              <RoomServiceOutlinedIcon />
+            </IconButton>
+            Tandoori House
+          </Typography>
+          <Rating value={4.2} precision={0.5} readOnly />
+          <Typography variant="body1" sx={{ marginTop: '5px' }}>₹150</Typography>
+          <Typography variant="body2" sx={{ color: 'green', marginTop: '5px' }}>15% OFF</Typography>
+          <Button 
+            variant="contained" 
+            color="warning" 
+            onClick={() => handleOrderNow({
+              image: NaanImage,
+              name: 'Butter Naan',
+              restaurant: 'Tandoori House',
+              price: '₹150',
+              offer: '15% OFF'
+            })}
+          >
+            OrderNow
+          </Button>
+        </Box>
+
+        <Box className="rice-card">
+          <img src={rice} alt="Rice" />
+          <Typography sx={{marginTop:'10px' , fontWeight:'bold'}}>Fried Rice</Typography>
+          <Typography variant="h6" sx={{ marginTop: '10px', fontWeight: 'bold' }}>
+            <IconButton edge="start">
+              <RoomServiceOutlinedIcon />
+            </IconButton>
+            Asian Delight
+          </Typography>
+          <Rating value={4.0} precision={0.5} readOnly />
+          <Typography variant="body1" sx={{ marginTop: '5px' }}>₹180</Typography>
+          <Typography variant="body2" sx={{ color: 'green', marginTop: '5px' }}>10% OFF</Typography>
+          <Button 
+            variant="contained" 
+            color="warning" 
+            onClick={() => handleOrderNow({
+              image: rice,
+              name: 'Fried Rice',
+              restaurant: 'Asian Delight',
+              price: '₹180',
+              offer: '10% OFF'
+            })}
+          >
+            OrderNow
+          </Button>
+        </Box>
+
+        <Box className="dosa-card">
+          <img src={idlidosa} alt="Dosa" />
+          <Typography sx={{marginTop:'10px' , fontWeight:'bold'}}>Masala Dosa</Typography>
+          <Typography variant="h6" sx={{ marginTop: '10px', fontWeight: 'bold' }}>
+            <IconButton edge="start">
+              <RoomServiceOutlinedIcon />
+            </IconButton>
+            South Indian Delights
+          </Typography>
+          <Rating value={4.7} precision={0.5} readOnly />
+          <Typography variant="body1" sx={{ marginTop: '5px' }}>₹120</Typography>
+          <Typography variant="body2" sx={{ color: 'green', marginTop: '5px' }}>5% OFF</Typography>
+          <Button 
+            variant="contained" 
+            color="warning" 
+            onClick={() => handleOrderNow({
+              image: idlidosa,
+              name: 'Masala Dosa',
+              restaurant: 'South Indian Delights',
+              price: '₹120',
+              offer: '5% OFF'
+            })}
+          >
+            OrderNow
+          </Button>
+        </Box>
+
+        <Box className="burger-card">
+          <img src={burger} alt="Burger" />
+          <Typography sx={{marginTop:'10px' , fontWeight:'bold'}}>Cheese Burger</Typography>
+          <Typography variant="h6" sx={{ marginTop: '10px', fontWeight: 'bold' }}>
+            <IconButton edge="start">
+              <RoomServiceOutlinedIcon />
+            </IconButton>
+            Burger Joint
+          </Typography>
+          <Rating value={4.3} precision={0.5} readOnly />
+          <Typography variant="body1" sx={{ marginTop: '5px' }}>₹200</Typography>
+          <Typography variant="body2" sx={{ color: 'green', marginTop: '5px' }}>25% OFF</Typography>
+          <Button 
+            variant="contained" 
+            color="warning" 
+            onClick={() => handleOrderNow({
+              image: burger,
+              name: 'Cheese Burger',
+              restaurant: 'Burger Joint',
+              price: '₹200',
+              offer: '25% OFF'
+            })}
+          >
+            OrderNow
+          </Button>
+        </Box>
+
+        <Box className="pizza-card">
+          <img src={pizza} alt="Pizza" />
+          <Typography sx={{marginTop:'10px' , fontWeight:'bold'}}>Pepperoni Pizza</Typography>
+          <Typography variant="h6" sx={{ marginTop: '10px', fontWeight: 'bold' }}>
+            <IconButton edge="start">
+              <RoomServiceOutlinedIcon />
+            </IconButton>
+            Pizza Place
+          </Typography>
+          <Rating value={4.8} precision={0.5} readOnly />
+          <Typography variant="body1" sx={{ marginTop: '5px' }}>₹300</Typography>
+          <Typography variant="body2" sx={{ color: 'green', marginTop: '5px' }}>30% OFF</Typography>
+          <Button 
+            variant="contained" 
+            color="warning" 
+            onClick={() => handleOrderNow({
+              image: pizza,
+              name: 'Pepperoni Pizza',
+              restaurant: 'Pizza Place',
+              price: '₹300',
+              offer: '30% OFF'
+            })}
+          >
+            OrderNow
+          </Button>
+        </Box>
+      </div>
+    </div>
+  );
+}
+
+export default Home;
+
+homepage.css
+
+.button1:hover{
+	border-radius: 25px;
+	cursor:pointer;
+}
+
+.button1:active{
+	cursor:progress;
+}
+
+.button:hover{
+	border-radius: 25px;
+	cursor:pointer;
+}
+
+.button:active{
+	cursor:progress;
+}
+
+.card-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 20px; 
+	margin-top: 300px; 
+	flex-wrap: wrap;
+  }
+  
+  .biryani-card, .naan-card, .rice-card ,.dosa-card ,.burger-card ,.pizza-card{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	background-color: #f5f5f5;
+	border-radius: 15px;
+	transition: transform 0.3s ease-in-out;
+  }
+  
+  .biryani-card:hover, .naan-card:hover ,.rice-card:hover ,.dosa-card:hover ,.burger-card:hover ,.pizza-card:hover{
+	transform: scale(1.02);
+  }
+  
+  .biryani-card img, .naan-card img , .rice-card img ,.dosa-card img ,.burger-card img,.pizza-card img{
+	border-radius: 15px;
+	width: 300px;
+	height: 200px;
+	transition: transform 0.3s ease-in-out;
+  }
+  
+<APP.js>
+
+import React from 'react'
+import Loginpage from './loginpage.js'
+function App()
+{
+
+	return(
+		<div>
+			<Loginpage />
+		</div>
+	);
+}
+
+ export default App
+
