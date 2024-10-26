@@ -1,0 +1,22 @@
+.sign{
+	border:1px solid black;
+	border-radius: 20px;
+	height: 330px;
+	width:300px;
+}
+
+.signupform input{
+	padding:3x;
+	margin-left: 10px;
+}
+
+.sign h3{
+	padding: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.sign button{
+	margin-left: 100px;
+	width:100px;
+}

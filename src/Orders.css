@@ -1,0 +1,36 @@
+/* Orders.css */
+.orders-container {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .order-item {
+	display: flex;
+	align-items: center;
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 8px;
+	background-color: #f9f9f9;
+  }
+  
+  .order-item img {
+	width: 100px;
+	height: 100px;
+	margin-right: 20px;
+	border-radius: 4px;
+  }
+  
+  .order-details {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  .total-amount {
+	margin-top: 20px;
+	font-weight: bold;
+	font-size: 1.2em;
+  }
+  

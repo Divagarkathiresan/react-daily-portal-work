@@ -1,0 +1,78 @@
+body {
+	/* background: linear-gradient(to right, #FFD700, #FFFACD); Golden to light yellow gradient */
+	background-color: #e8da86;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.body {
+	/* background: linear-gradient(to bottom, #FFD700, #FFFACD); Golden to light yellow gradient */
+	background-color: #fbe775;
+	display: flex;
+	width: 400px;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 1px solid black;
+	border-radius: 25px;
+	flex-wrap: nowrap;
+	transform: scale(1.1); /* Slightly enlarge the content */
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+h2, h3 {
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h3 {
+	margin-top: 0px;
+}
+
+form label {
+	font-size: medium;
+	margin-left: 0px;
+	padding: 5px;
+}
+
+input {
+	width: 250px;
+	height: 23px;
+}
+
+form a {
+	display: flex;
+	justify-content: flex-end;
+	font-size: small;
+	padding-bottom: 9px;
+}
+
+button {
+	background-color: blue;
+	border: none;
+	height: 30px;
+	color: white;
+	font-size: medium;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input:active {
+	border-radius: 20px;
+}
+
+button:hover {
+	background-color: blue;
+	cursor: pointer;
+	border-radius: 20px;
+}
+
+button:active {
+	background-color: green;
+	cursor: progress;
+}
