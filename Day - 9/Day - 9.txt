@@ -1,0 +1,125 @@
+//Day - 9
+//Albms.js
+import React from 'react';
+const Albums = () => {
+    return (
+        <div>
+            <h2>Albums</h2>
+            <ul>
+                <li>Album A - John Doe</li>
+                <li>Album B - Jane Smith</li>
+                <li>Album C - Bob Johnson</li>
+            </ul>
+        </div>
+    );
+};
+
+export default Albums;
+
+//App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import Home from './components/Home';
+import Singers from './components/Singers';
+import Albums from './components/Albums';
+import './App.css';
+
+function App() {
+    return (
+        <Router>
+            <div className="App">
+                <NavBar />
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route path="/singers" component={Singers} />
+                    <Route path="/albums" component={Albums} />
+                </Switch>
+            </div>
+        </Router>
+    );
+}
+
+export default App;
+
+
+
+//Home.js
+import React from 'react';
+const Home = () => {
+    return (
+        <div>
+            <h2>Welcome to Music World!</h2>
+        </div>
+    );
+};
+
+export default Home;
+
+
+//navbar.css
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar li {
+    margin: 0 10px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+
+//Navbar.js
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './NavBar.css';
+
+const NavBar = () => {
+    return (
+        <nav className="navbar">
+            <h1>Music World</h1>
+            <ul>
+                <li><Link to="/">Home</Link></li>
+                <li><Link to="/singers">Singers</Link></li>
+                <li><Link to="/albums">Albums</Link></li>
+            </ul>
+        </nav>
+    );
+};
+
+export default NavBar;
+
+
+//Singers.js
+import React from 'react';
+const Singers = () => {
+    return (
+        <div>
+            <h2>Singers</h2>
+            <ul>
+                <li>John Doe - 1990</li>
+                <li>Jane Smith - 1985</li>
+                <li>Bob Johnson - 2000</li>
+            </ul>
+        </div>
+    );
+};
+
+export default Singers;
