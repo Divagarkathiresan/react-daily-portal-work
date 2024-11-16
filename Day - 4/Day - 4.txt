@@ -1,0 +1,127 @@
+Day - 4 
+
+Class Exercises ( CE )
+
+1.)
+import React, { useState } from 'react';
+import { FormControl, Select, MenuItem, TextField, Button } from '@mui/material';
+
+function DropdownMenu() {
+
+  const[istrue,setistrue] = useState(false);
+
+  const HandleSubmit = () =>
+  {
+    setistrue(true);
+    if(istrue)
+      {
+        alert("The form is submitted");
+      }
+  }
+
+  
+  return (
+    <FormControl>
+		<br></br>
+		<TextField label="Name"> Name </TextField>
+		<br></br>
+      <Select
+        labelId="dropdown-label"
+        label="Options"
+      >
+		<MenuItem disabled> Options</MenuItem>
+        <MenuItem value={10}>Option 1</MenuItem>
+        <MenuItem value={20}>Option 2</MenuItem>
+        <MenuItem value={30}>Option 3</MenuItem>
+      </Select>
+      <br></br>
+      <Button variant='contained' onClick={HandleSubmit}>Submit</Button>
+    </FormControl>
+  );
+}
+
+export default DropdownMenu;
+
+
+Practice At Home ( PAH )
+
+1.)
+import React , { useState }from "react";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle,TextField } from "@mui/material";
+
+export default function Dialougebox()
+{
+	const[isTure , setisTrue] = useState(false);
+	let Name;
+	let Pass;
+
+	const HandleOpen = () =>
+	{
+		setisTrue(true);
+	}
+
+	const HandleClose = () =>
+	{
+		setisTrue(false);
+	}
+
+	const HandleName = (event) =>
+	{
+		Name = event.target.value;
+	}
+
+	
+	const HandlePass = (event) =>
+		{
+			Pass = event.target.value;
+		}
+
+	const HandleSubmit = () =>
+	{
+		let len1 = Name.length;
+		let len2 = Pass.length;
+
+		if((len1 >= 4 && len1 <=16 ) && (len2>=8 && len2<=16))
+		{
+			alert("The login details are valid");
+		}
+
+		else
+		{
+			alert("The login details are not valid");
+		}
+
+		setisTrue(false);
+	}
+
+	return(
+		<div>
+			<Button variant='contained' onClick={HandleOpen}>Login</Button>
+			<br></br>
+			<Dialog open={isTrue}>
+				<DialogTitle>
+					Login
+				</DialogTitle>
+				<DialogContent>
+				
+              <TextField
+                fullWidth
+                label="Username"
+                variant="standard"
+				onChange={HandleName}
+              />
+			  <TextField
+			  fullWidth
+			  label = "Password"
+			  variant="standard"
+			  onChange={HandlePass}
+			  />
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={HandleClose}>cancel</Button>
+					<Button onClick={HandleSubmit} >Login</Button>
+				</DialogActions>
+			</Dialog>
+		</div>
+	)
+}
