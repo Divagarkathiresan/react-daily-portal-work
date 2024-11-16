@@ -1,0 +1,310 @@
+DAY - 3 
+
+1.) LIFECYCLE
+
+import React ,{ Component } from 'react';
+class Counter extends Component
+{
+    constructor(props)
+    {
+	super(props)
+    this.state={
+        count:0
+    }
+    };
+componentDidMount()
+{
+    console.log("Mounted");
+}
+shouldComponentUpdate(nextProps,nextState)
+{
+    console.log('updating',nextState);
+    return true;
+}
+componentDidUpdate(prevProps,prevState)
+{
+    console.log('updated from',prevState,' to ',this.state);
+}
+componentWillUnmount()
+{
+    console.log("unmounted");
+}
+increment=()=>{
+    this.setState((prevState)=>({
+        count : prevState.count+1
+    }));
+};
+render()
+{
+    return(
+        <div>
+            <h1>Counter: {this.state.count}</h1>
+            <button onClick={this.increment}>Increment</button>
+
+            </div>
+    );
+}
+}
+export default Counter;
+
+2.) INCREMENT
+
+import React , {useState} from 'react'
+function App(){
+const {count,Setcount}=useState(0);
+const incerment=()=>                                                       //rfc ->react function component , rcc-> react class component
+{
+	Setcount(count+1)
+}
+return(
+<div>
+<h1>Good Evening All </h1>
+<h2>increment:</h2>
+<button onClick={increment}>Increment</button>     
+</div>
+)
+}
+
+export default App;
+
+
+3.)LOGINPAGE 
+   (**LOGIN_PAGE_HTML**)
+
+import React, { useState } from 'react';
+import SignUp from './signup';
+import './loginpage.css';
+
+function Login() {
+  const click = () => {
+    alert("Form submitted!");
+  };
+  
+  const [showSignUp, setShowSignUp] = useState(false);
+
+  const handleSignUpClick = () => {
+    setShowSignUp(true);
+  };
+
+
+  return (
+    <div className='container1'>
+      {showSignUp ? (
+        <SignUp />
+      ) : (
+        <div>
+          <h2>Hiii Soldiers</h2>
+          <div className='parent'>
+            <div className='container'>
+              <h3>Login</h3>
+              <form onSubmit={click}>
+                <label className="name">UserName:</label>
+                <br />
+                <input type='text' placeholder='Divagar' required className="inp" />
+                <br />
+                <label className="name">Password:</label>
+                <br />
+                <input type='password' placeholder='*********' required />
+                <br />
+                <a href="#" style={{ textDecoration: 'none' }} className="link1">Forget Password?</a>
+                <br />
+                <button type="submit">Submit</button>
+              </form>
+              <h5>
+                Don't have An Account?{' '}
+                <a
+                  href="#"
+                  target="_blank"
+                  style={{ textDecoration: 'none', fontSize: 'medium' }}
+                  onClick={handleSignUpClick}
+                >
+                  Sign Up
+                </a>
+              </h5>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Login;
+
+
+(**LOGINPAGE_CSS**)
+
+.parent{
+	height:700px;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center; 
+}
+h2{
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	position: absolute;
+	margin:50px;
+}
+.container{
+	border:1px dashed black;
+	font-size:large;
+	height:50%;
+	width:100%;
+	background-color: white;
+}
+.container h3{
+	
+	margin-top:20px;
+	font-size: xx-large;	
+	margin-left:70px;
+	color:darkblue;
+	font-weight: 100%;
+}
+.container .inp{
+	margin-top: 10px;
+	margin-bottom:10px;
+	width:200px;
+	height: 30px;
+	border-radius: 9px;
+	border: 1px solid black;
+}
+.container input{
+	margin-top: 10px;
+	width:200px;
+	height: 30px;
+	border-radius: 9px;
+	border: 1px solid black;
+}
+.container label{
+	font-size: larger;
+	margin-top: 10px;
+}
+.container1{
+	width:100%;
+	height:100%;
+	margin: 5px;
+	background-color: rgb(232, 232, 232);
+	border-radius: 5px;
+}
+form{
+	margin-left: 30px;
+}
+.link1
+{
+	font-size: x-small;
+	margin-left: 130px;
+	color:blue;
+}
+a:hover{
+	color:rgb(0, 181, 252);
+	cursor:pointer;
+}
+a:active{
+	color:red;
+	cursor: progress;
+}
+button{
+	margin-top: 6px;
+	margin-left: 80px;
+	height:30px;
+	width: fit-content;
+	background-color: rgb(6, 114, 255);
+	border: 1px solid black;
+	color: white;
+}
+button:hover{
+	background-color: rgb(129, 182, 251);
+	color:blue;
+	cursor:pointer;
+}
+button:active{
+	cursor: progress;
+}
+h5{
+	margin:10px;
+	margin-left:40px;
+}
+h5 a{
+	font-size: small;
+	color:blue
+}
+
+
+4.) HOMEPAGE
+
+
+import React from "react";
+// import Avatar from '@mui/material/Avatar';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Button from '@mui/material/Button';
+import MenuIcon from '@mui/material/Menu';
+// import Stack from '@mui/material/Stack'
+import './homepage.css';
+
+function Home() {
+  return (
+    <div>
+      <AppBar color="info">
+		<MenuIcon>
+
+		</MenuIcon>
+        <Toolbar style={{justifyContent:"end"}}> {/* Align content to the right */}
+		<div class="container"> 
+			<Button
+				className="button1"
+				variant="contained"
+				sx={{
+					backgroundColor: 'info',
+					'&:hover': {
+					backgroundColor:'red',
+					'&:active' :{
+					backgroundColor:'green'
+					}
+					}}}>
+			Login
+			</Button>
+			&nbsp;
+			<Button 
+			className="button" 
+			variant="contained"
+			sx={{
+				backgroundColor: 'info',
+				'&:hover': {
+				backgroundColor:'red',
+				'&:active' :{
+				backgroundColor:'green'
+				}
+				}}}
+			>
+			SignUp
+			</Button>
+		 </div>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+}
+
+export default Home;
+
+ (**HOME PAGE CSS **)
+
+.button1:hover{
+	border-radius: 25px;
+	cursor:pointer;
+}
+
+.button1:active{
+	cursor:progress;
+}
+
+.button:hover{
+	border-radius: 25px;
+	cursor:pointer;
+}
+
+.button:active{
+	cursor:progress;
+}
